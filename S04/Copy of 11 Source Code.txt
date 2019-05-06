@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>AJAX</title>
+</head>
+<body>
+    <h1>Learn AJAX</h1>
+    <div id="output"></div>
+    <button id="trigger">Get a Joke</button>
+    <script type="text/javascript">
+        var joker = document.querySelector('#trigger');
+        joker.addEventListener('click',loadJoke)
+        
+        function loadJoke(){
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function(){
+                if(this.readyState==4){
+                    if(this.status==200){
+                        var json = JSON.parse(this.responseText);
+                        console.log(json)
+                        var html = '<div><img src="'+json.icon_url+'">'+json.value+'</div>';
+                        document.querySelector('#output').innerHTML = html;
+                    }
+                }
+            }
+            ajax.open('GET','https://api.chucknorris.io/jokes/random',true);
+            ajax.send();
+        }
+        
+        
+    </script>
+</body>
+</html>

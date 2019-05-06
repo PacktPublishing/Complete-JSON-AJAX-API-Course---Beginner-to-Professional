@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cyrpto Currency Prices</title>
+</head>
+
+<body>
+    <button id="allRates">See All</button>
+    <ul id="output"></ul>
+    <script>
+        var allRates = document.querySelector('#allRates');
+        var url = 'https://api.coinmarketcap.com/v1/ticker/';
+        allRates.addEventListener('click', getAllRates);
+
+        function getAllRates() {
+            fetch(url).then(function (response) {
+                return response.json()
+            }).then(function (data) {
+                console.log(data);
+            }).catch(function (error) {
+                console.log(JSON.stringify(error));
+            });
+        }
+    </script>
+</body>
+
+</html>

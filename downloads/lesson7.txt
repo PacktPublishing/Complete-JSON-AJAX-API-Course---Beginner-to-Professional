@@ -1,0 +1,20 @@
+
+// https://www.getpostman.com/
+// https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en
+
+var express = require('express')
+var app = express()
+ 
+app.get('/', function (req, res) {
+  res.send('GET sent')
+})
+app.post('/', function (req, res) {
+  res.send('POST sent')
+})
+app.put('/', function (req, res) {
+  res.send('PUT sent')
+})
+app.delete('/', function (req, res) {
+  res.send('DELETE sent')
+})
+app.listen(3000)

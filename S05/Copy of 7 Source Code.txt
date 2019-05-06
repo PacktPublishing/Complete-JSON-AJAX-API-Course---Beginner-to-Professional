@@ -1,0 +1,17 @@
+<div id="output">Hello World</div>
+<script>
+$('#output').click(function(){
+  $.ajax({
+    dataType:"json",
+    url:'https://jsonplaceholder.typicode.com/posts/1',
+    success:success
+  })
+  .done(function(){console.log('DONE')})
+})
+function success(data,status,xhr){
+  console.log(data)
+  console.log(status)
+  console.log(xhr)
+  $('#output').html(data.title)
+}
+</script>

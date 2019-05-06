@@ -1,0 +1,14 @@
+Google Script Resources
+
+https://www.google.com/script/start/
+https://developers.google.com/apps-script/reference/content/content-service
+https://developers.google.com/speed/libraries/
+https://developers.google.com/apps-script/reference/spreadsheet/range#getValues()
+https://developers.google.com/apps-script/reference/spreadsheet/range
+https://developers.google.com/apps-script/reference/spreadsheet/sheet#getSheetName()
+Postman - https://www.getpostman.com/
+
+API - https://randomuser.me/api/
+
+
+

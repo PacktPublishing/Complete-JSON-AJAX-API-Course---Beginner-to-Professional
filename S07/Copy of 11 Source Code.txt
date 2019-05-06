@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Google Sheets JSON</title>
+</head>
+<body>
+    <h1>Learn AJAX JSON data from Google Sheets</h1>
+    <button type="button" id="loadData">Load JSON</button>
+    <div id="output"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $('#loadData').click(function(){
+                var url = 'https://script.google.com/macros/s/AKfycbz3XKJ4o7B6SADFyiKA0peYuVBtgkV73l9XVPzryea7ib_uYQvB/exec'
+                $.getJSON(url,function(data){
+                    console.log(data);
+                     var html = '<h3>Google Sheet Data</h3><ul>';
+                    $.each(data,function(key,val){
+                        html += '<li> '
+                        for(var x=0;x<val.length;x++){
+                            html += val[x] + ' '
+                        }
+                        html += '</li> '
+                    })
+                    html += '</ul> '
+                    $('#output').html(html);
+                })
+                
+            })
+            
+            
+            
+            
+            
+            
+        });
+        
+        
+        
+        
+        
+        
+        
+    </script>
+</body>
+</html>

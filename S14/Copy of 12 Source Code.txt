@@ -1,0 +1,19 @@
+Node Packages
+
+https://nodejs.org/en/
+https://www.npmjs.com/package/nodemon
+https://www.npmjs.com/package/express
+https://www.npmjs.com/package/body-parser
+https://www.npmjs.com/package/twit
+
+Section Tools
+
+http://brackets.io/
+https://jsonlint.com/
+
+Twitter API and Developer links
+
+https://apps.twitter.com/
+https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets
+https://developer.twitter.com/
+https://api.twitter.com/1.1/search/tweets.json

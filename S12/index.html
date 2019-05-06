@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Realtime Messages with Pusher </title>
+</head>
+
+<body>
+    <h1> Realtime Messages with Pusher </h1>
+    <div>
+        <form id="mesSender">
+            <input type="text" id="userName" placeholder="Your Name" required>
+            <br>
+            <textarea id="newMessage" rows="4" placeholder="Enter Message"></textarea>
+            <br>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+    <div id="messages"></div>
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

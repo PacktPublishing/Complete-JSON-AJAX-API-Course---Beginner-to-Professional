@@ -1,0 +1,7 @@
+
+https://www.browserling.com/tools/remove-all-whitespace 
+
+https://jsonlint.com/
+
+http://myjson.com/rpgux
+http://api.myjson.com/bins/1ap721

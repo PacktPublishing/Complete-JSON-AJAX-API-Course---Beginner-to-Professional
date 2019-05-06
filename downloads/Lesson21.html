@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AJAX with Node Express Server</title>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        li {
+            margin: 0 3px 3px 3px;
+            padding: 0.5em;
+            font-size: 1.2em;
+            height: 20px;
+        }
+        
+        li span {
+            font-size: 0.8em;
+            border: 1px solid black;
+            padding: 0 6px;
+            display: inline-block;
+        }
+        
+        .btn {
+            border: 1px solid black;
+            padding: 5px;
+            display: inline-block
+        }
+        
+        .editBtn {
+            width: 100px;
+            text-align: center;
+            border: 1px solid black;
+            padding: 5px;
+            display: none;
+        }
+        
+        .viewLink a {
+            text-decoration: none;
+        }
+        
+        #myForm {
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Hello, world!</h1>
+    <ul id="usersList"></ul>
+    <form id="myform">
+        <input type="text" name="user" placeholder="User Name">
+        <input type="text" name="pass" placeholder="Password">
+      </form>
+    <div class="btn">Click Me</div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            buildPage();
+        })
+        $('#usersList').on('click', '.remove', function () {
+            var id = $(this).parent().data('user').id;
+            $.ajax({
+                url: '/users/' + id
+                , type: 'DELETE'
+                , success: function (rep) {
+                    console.log(rep);
+                    buildPage();
+                }
+            })
+        })
+        $('#usersList').on('click', '.edit', function () {
+            var data = $(this).parent().find('input').serialize();
+            var id = $(this).parent().find('input[name="id"]').val();
+            $.ajax({
+                url: '/users/' + id
+                , type: 'PUT'
+                , data: data
+                , success: function (rep) {
+                    console.log(rep);
+                    buildPage();
+                }
+            })
+
+        })
+
+        $('.btn').click(function () {
+            var user = $('input[name="user"]').val();
+            var pass = $('input[name="pass"]').val();
+            $.post('/users', $('#myform').serialize()).done(function (data) {
+                console.log(data);
+                buildPage();
+            })
+        })
+
+        function buildPage() {
+            $('#usersList').html(' ');
+            $.getJSON('/users', function (data) {
+                $.each(data.users, function (i, value) {
+                    var el = '<li><input type="text" name="user" value="'+value.user+'">';
+                    el += '<input type="text" name="pass" value="'+value.pass+'">';
+                    el += '<input type="hidden" name="id" value="'+value.id+'">';
+                    el += '<span class="remove">x</span><span class="edit">Save</span>';
+                    el += '<span class="viewLink"><a href="/users/' + value.id + '" target="_blank">View</a></span></li>';
+                    var listNew = $(el);
+                    listNew.data('user', value);
+                    $('#usersList').append(listNew);
+                })
+            })
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSON Exercise</title>
+</head>
+<body>
+    <h1>Learn JSON</h1>
+    <div id="output">
+        <ul id="taskList"></ul>
+    </div>
+    <script type="text/javascript">
+        var data = '{"tasks":{"Cut Grass":true,"Clean Room":false,"Go to Gym":true,"Make Dinner":false}}';
+        var dataJSON = JSON.parse(data);
+        
+        var output = document.getElementById('output');
+        var taskList = document.querySelector('#taskList');
+        
+        for(var key in dataJSON.tasks){
+            //console.log(key , dataJSON.tasks[key])
+            var status = !dataJSON.tasks[key] ? ' ' : ' checked ';
+            var html = '<li>'+key+' <input type="checkbox" value="'+key+'" '+status+'></li>';
+            taskList.innerHTML += html;
+            
+        }
+        addEvents()
+        function addEvents(){
+            var checkBoxes =document.querySelectorAll('#taskList input[type="checkbox"]');
+            for(var index in checkBoxes){
+                checkBoxes[index].onchange = updateJSON;
+            }
+            console.log(checkBoxes)
+        }
+        
+        function updateJSON(){
+            var key = event.target.value;
+            console.log(key,event.target.checked)
+            dataJSON.tasks[key] = event.target.checked
+        }
+        
+        
+        
+        //console.log(dataJSON)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </script>
+</body>
+</html>

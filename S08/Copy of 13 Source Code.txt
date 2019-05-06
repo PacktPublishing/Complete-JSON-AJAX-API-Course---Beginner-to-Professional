@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>AJAX tester</title>
+    <style>
+        .heading {
+            display: block;
+            width: 100%;
+            border: 1px solid black;
+            background-color: #222;
+            color: #fff;
+            padding: 10px;
+        }
+        
+        div > p {
+            font-size: 0.8em;
+            color: #111;
+            padding: 20px;
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>AJAX Tester</h1>
+    <div>URL:
+        <input type="text" name="url" value="https://reqres.in/api/users/2"> </div>
+    <div>
+        <select id="resource">
+            <option value="JavaScript">JavaScript</option>
+            <option value="jQuery">jQuery</option>
+            <option value="Axios">Axios</option>
+            <option value="Fetch">Fetch</option>
+        </select>
+    </div>
+    <div>
+        <select id="method">
+            <option value="GET" selected>get</option>
+            <option value="POST" >post</option>
+        </select>
+    </div>
+    <form id="myForm">
+        <input type="text" name="first" value="Laurence">
+        <input type="text" name="num" value="10"> </form>
+    <div>
+        <input type="button" name="sender" value="Make Request"> </div>
+    <div id="output"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script>
+        //https://api.chucknorris.io/jokes/random
+        //https://randomuser.me/api/
+        document.addEventListener("DOMContentLoaded", function (event) {
+            document.querySelector('input[name="sender"]').addEventListener('click', makeRequest)
+        });
+        function makeRequest() {
+            var url = document.querySelector('input[name="url"]').value;
+            var resource = document.querySelector('#resource').value;
+            var method = document.querySelector('#method').value;
+            var formd = $('#myForm').serialize()
+            switch (resource) {
+            case "jQuery":
+                ajaxJQ(url, method, formd);
+                break;
+            case "Axios":
+                ajaxAX(url, method, formd);
+                break;
+            case "Fetch":
+                ajaxFe(url, method, formd);
+                break;
+            default:
+                ajaxJS(url, method, formd);
+            }
+        }
+        function ajaxFe(url, method, formd)  {
+            var para = method == 'POST' ? {
+                method:method,
+                body:formd,
+                headers:{'Content-Type': 'application/x-www-form-urlencoded'}
+            }:{}
+            fetch(url,para).then(function (response) {
+                //check status
+                return response.json()
+            }).catch(function (error) {
+                return output(error, '0', 'Fetch FAILED')
+            }).then(function (response) {
+                return output(response, '200', 'Fetch AJAX')
+            })
+        }
+        function ajaxAX(url, method, formd)  {
+            axios({
+                method: method
+                , url: url
+                ,data:formd
+            }).then(function (response) {
+                output(response.data, response.status, 'Axios response')
+            }).catch(function(error){
+                output(response.data, response.status, 'Axios FAIL')
+            })
+        }
+        function ajaxJQ(url, method, formd) {
+            $.ajax({
+                url: url
+                , type: method
+                , data: formd
+                , success: function (data) {
+                    //console.log(data)
+                }
+            }).done(function (response, textStatus, xhr) {
+                output(response, xhr.status, 'jQuery response')
+            }).fail(function (response, textStatus, xhr) {
+                output(response, xhr.status, 'jQuery ERROR')
+            })
+        }
+        function ajaxJS(url, method, formd) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        output(xhr.responseText, xhr.status, 'JavaScript response')
+                    }
+                    else if (xhr.status == 201) {
+                        output(xhr.responseText, xhr.status, 'JavaScript Added')
+                    }
+                    else {
+                        output(xhr.responseText, xhr.status, 'JavaScript Error')
+                    }
+                }
+            }
+            if (method == 'GET') {
+                xhr.open('GET', url, true);
+                xhr.send();
+            }
+            else {
+                xhr.open('POST', url, true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send(formd);
+            }
+        }
+        function output(responseText, status, xhr) {
+            var output = document.getElementById('output');
+            
+            console.log(responseText)
+            console.log('%c' + status, "color:green")
+            console.log('%c' + xhr , "color:red")
+            
+            responseText = ((typeof responseText) == 'string') ? JSON.parse(responseText) : responseText;
+           
+            output.innerHTML = '<div><span class="heading">Response Text</span><p>' + JSON.stringify(responseText) + '</p></div>'
+            output.innerHTML += '<div><span class="heading">Status</span><p>' + JSON.stringify(status) + '</p></div>'
+            output.innerHTML += '<div><span class="heading">Response</span><p>' + JSON.stringify(xhr) + '</p></div>'
+        }
+    </script>
+</body>
+</html>

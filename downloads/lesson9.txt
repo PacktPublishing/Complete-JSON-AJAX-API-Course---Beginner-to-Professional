@@ -1,0 +1,27 @@
+///https://www.npmjs.com/package/body-parser
+const express = require('express')
+const app = express()
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+app.use(function(req,res,next){
+    console.log("I'm in the middle");
+    console.log(req.body.username);
+    console.log(req.body.password);
+    next();
+})
+
+app.get('/', function (req, res) {
+  res.send('GET sent')
+})
+app.post('/', function (req, res) {
+  res.send('POST sent')
+})
+app.put('/', function (req, res) {
+  res.send('PUT sent')
+})
+app.delete('/', function (req, res) {
+  res.send('DELETE sent')
+})
+app.listen(3000)

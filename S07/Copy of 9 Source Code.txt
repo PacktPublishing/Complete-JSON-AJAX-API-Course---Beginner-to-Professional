@@ -1,0 +1,25 @@
+//https://www.google.com/script/start/
+//https://developers.google.com/apps-script/reference/content/content-service
+//https://developers.google.com/speed/libraries/
+    //https://www.getpostman.com/
+    ///https://developers.google.com/apps-script/reference/spreadsheet/range#getValues()
+    //https://developers.google.com/apps-script/reference/spreadsheet/range
+    //https://developers.google.com/apps-script/reference/spreadsheet/sheet#getSheetName()
+function doGet(e){
+  //return ContentService.createTextOutput('Hello World');
+  
+  try{
+    var ss = SpreadsheetApp.openById("1ClxTzAiekpfuba7RJbNmCk9p99iaGg6QEINAPYdNoNI");
+    var sheet = ss.getSheetByName('Sheet1');
+    var data = sheet.getRange(2, 1, sheet.getLastRow()-1, sheet.getLastColumn()).getValues();
+    var jsonData = JSON.stringify(data)
+    return ContentService.createTextOutput(jsonData).setMimeType(ContentService.MimeType.JSON)
+  }
+  catch(e){
+    var error = {"error":e}
+    var jsonError = JSON.stringify(error)
+    return ContentService.createTextOutput(jsonError).setMimeType(ContentService.MimeType.JSON)
+  }
+  
+}
+ 

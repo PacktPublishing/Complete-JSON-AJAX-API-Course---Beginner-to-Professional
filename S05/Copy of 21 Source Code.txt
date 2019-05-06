@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Learn AJAX</title>
+</head>
+<body>
+    <h1>Learn AJAX jQuery</h1>
+    <div id="output"></div>
+    <form id="myForm"> First Name :
+        <input type="text" name="first" value="Laurence">
+        <br> Last Name:
+        <input type="text" name="last" value="Svekis">
+        <input type="submit" value="submit data"> </form>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        var myForm = document.getElementById('myForm');
+        myForm.addEventListener('submit',function(e){
+            e.preventDefault();
+            var url = 'https://randomuser.me/api/?results=10';
+            axios.get(url)
+            .then(function(data){
+                var people = data.data.results;
+                var html = '<h2>Results</h2>'
+                for(var x=0;x<people.length;x++){
+                     html += people[x].name.first + '  ' + people[x].name.last + '<img src="'+people[x].picture.thumbnail+'"><br>';
+                }
+                
+                
+                document.querySelector('#output').innerHTML = html;
+            })
+        })
+        
+        
+        
+        
+        
+    </script>
+</body>
+</html>

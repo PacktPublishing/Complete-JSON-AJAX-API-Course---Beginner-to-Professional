@@ -1,0 +1,19 @@
+https://www.npmjs.com/package/body-parser
+https://www.npmjs.com/package/express
+https://www.npmjs.com/package/nodemon
+
+https://github.com/mappmechanic/flash-comments
+
+
+npm install
+nom install nodemon
+npm install body-parser
+
+npm install pusher
+
+http://brackets.io/
+https://nodejs.org/en/
+
+
+https://pusher.com
+https://pusher.com/tutorials?page=2

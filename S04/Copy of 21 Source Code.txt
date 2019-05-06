@@ -1,0 +1,10 @@
+https://api.chucknorris.io/jokes/random
+
+https://randomuser.me/api/
+
+https://developer.chrome.com/devtools
+
+http://brackets.io/
+
+https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX
+

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>AJAX tester</title>
+    <style>
+        .heading {
+            display: block;
+            width: 100%;
+            border: 1px solid black;
+            background-color: #222;
+            color: #fff;
+            padding: 10px;
+        }
+        
+        div > p {
+            font-size: 0.8em;
+            color: #111;
+            padding: 20px;
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>AJAX Tester</h1>
+    <div>URL:
+        <input type="text" name="url" value="https://reqres.in/api/users/2"> </div>
+    <div>
+        <select id="resource">
+            <option value="JavaScript">JavaScript</option>
+            <option value="jQuery">jQuery</option>
+            <option value="Axios">Axios</option>
+            <option value="Fetch">Fetch</option>
+        </select>
+    </div>
+    <div>
+        <input type="button" name="sender" value="Make Request"> </div>
+    <div id="output"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+            document.querySelector('input[name="sender"]').addEventListener('click', makeRequest)
+        });
+
+        function makeRequest() {
+            var url = document.querySelector('input[name="url"]').value;
+            var resource = document.querySelector('#resource').value;
+            switch (resource) {
+            case "jQuery":
+                ajaxJQ(url);
+                break;
+            case "Axios":
+                ajaxAX(url);
+                break;
+            case "Fetch":
+                ajaxFe(url);
+                break;
+            default:
+                ajaxJS(url);
+            }
+        }
+
+        function ajaxFe(url) {
+            fetch(url).then(function (response) {
+                //check status
+                return response.json()
+            }).catch(function (error) {
+                return output(error, '0', 'Fetch FAILED')
+            }).then(function (response) {
+                return output(response, '200', 'Fetch AJAX')
+            })
+        }
+
+        function ajaxAX(url) {
+            axios({
+                method: 'GET'
+                , url: url
+            }).then(function (response) {
+                console.log(response)
+                output(response.data, response.status, 'Axios response')
+            })
+        }
+
+        function ajaxJQ(url) {
+            $.ajax({
+                url: url
+                , type: 'GET'
+                , success: function (data) {
+                    //console.log(data)
+                }
+            }).done(function (response, textStatus, xhr) {
+                output(response, xhr.status, 'jQuery response')
+            })
+        }
+
+        function ajaxJS(url) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    output(xhr.responseText, xhr.status, 'JavaScript response')
+                }
+            }
+            xhr.open('GET', url, true)
+            xhr.send();
+        }
+
+        function output(responseText, status, xhr) {
+            var output = document.getElementById('output');
+            responseText = ((typeof responseText) == 'string') ? JSON.parse(responseText) : responseText;
+            console.log(responseText)
+            output.innerHTML = '<div><span class="heading">Response Text</span><p>' + JSON.stringify(responseText) + '</p></div>'
+            output.innerHTML += '<div><span class="heading">Status</span><p>' + JSON.stringify(status) + '</p></div>'
+            output.innerHTML += '<div><span class="heading">Response</span><p>' + JSON.stringify(xhr) + '</p></div>'
+        }
+    </script>
+</body>
+
+</html>

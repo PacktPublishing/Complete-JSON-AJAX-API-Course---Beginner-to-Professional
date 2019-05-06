@@ -1,0 +1,11 @@
+Resources used within the lessons
+
+http://brackets.io/
+
+https://www.npmjs.com/package/express
+https://www.npmjs.com/package/request
+https://www.npmjs.com/package/nodemo
+
+https://nodejs.org/en/
+https://coinmarketcap.com/
+https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch

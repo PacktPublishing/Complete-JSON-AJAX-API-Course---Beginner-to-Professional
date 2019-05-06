@@ -1,0 +1,18 @@
+API
+
+https://api.chucknorris.io/jokes/random
+https://randomuser.me/api/
+
+AJAX Lib
+
+https://github.com/axios/axios
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+
+jQuery
+
+http://jquery.com/
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+

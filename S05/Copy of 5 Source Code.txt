@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Learn AJAX</title>
+</head>
+<body>
+    <h1>Learn AJAX jQuery</h1>
+    <div id="output"></div>
+    <button id="clickMe">Click Here</button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $('#clickMe').click(webData);
+        function webData() {
+            $.ajax({
+                method: 'GET'
+                , url: 'https://jsonplaceholder.typicode.com/posts/2'
+                , dataType: 'json'
+            }).done(output).fail(function () {
+                console.log('Error!!');
+            })
+        }
+        function output(data) {
+            $('#output').html('<h2>' + data.title + '</h2><p>' + data.body + '</p>')
+        }
+    </script>
+</body>
+</html>

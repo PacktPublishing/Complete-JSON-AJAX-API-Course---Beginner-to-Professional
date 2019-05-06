@@ -1,0 +1,17 @@
+Editor
+
+http://brackets.io/
+
+API endpoints
+
+https://randomuser.me/api/
+https://www.googleapis.com/youtube/v3/search/?part=snippet&key=***KEY***&q=test&maxResults=10
+https://en.wikipedia.org/w/api.php?format=json&action=opensearch&origin=*&search=javascript
+
+Google Key
+
+https://developers.google.com/youtube/v3/getting-started
+
+
+
+

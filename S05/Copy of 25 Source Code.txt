@@ -1,0 +1,18 @@
+Promise based HTTP client for the browser and node.js : https://github.com/axios/axios
+
+jQuery JavaScript Library : https://github.com/jquery/jquery
+
+Brackets : http://brackets.io/
+Google DevTools : https://developer.chrome.com/devtools
+
+To access the DevTools, open a web page or web app in Google Chrome. Either:
+
+Select the Chrome menu Chrome Menu at the top-right of your browser window, then select Tools > Developer Tools.
+Right-click on any page element and select Inspect Element.
+The DevTools window will open at the bottom of your Chrome browser.
+
+There are several useful shortcuts for opening the DevTools:
+
+Use Ctrl+Shift+I (or Cmd+Opt+I on Mac) to open the DevTools.
+Use Ctrl+Shift+J (or Cmd+Opt+J on Mac) to open the DevTools and bring focus to the Console.
+Use Ctrl+Shift+C (or Cmd+Shift+C on Mac) to open the DevTools in Inspect Element mode, or 

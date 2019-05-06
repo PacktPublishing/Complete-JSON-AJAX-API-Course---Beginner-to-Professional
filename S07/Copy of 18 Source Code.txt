@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Google Sheets JSON</title>
+</head>
+<body>
+    <h1>Learn AJAX JSON data from Google Sheets</h1>
+    <button type="button" id="loadData">Load JSON</button>
+    <button type="button" id="fillData">Get Random User</button>
+    <form id="myForm">
+        <div>First Name :
+            <input type="text" name="First" value="First Name">
+            <br> </div>
+        <div>Last Name :
+            <input type="text" name="Last" value="Last Name">
+            <br> </div>
+        <div>Company :
+            <input type="text" name="Company" value="Company">
+            <br> </div>
+        <div>Group :
+            <input type="text" name="Group" value="Group">
+            <br> </div>
+        <div>Email :
+            <input type="text" name="Email" value="Email@email.com">
+            <br> </div>
+        <button type="submit" id="submit">Send Data to Google Sheet</button>
+    </form>
+    <div id="output"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $('#fillData').click(function () {
+                $.ajax({
+                    url: 'https://randomuser.me/api/'
+                    , dataType: 'json'
+                    , success: function (data) {
+                        console.log(data.results[0]);
+                        var obj = data.results[0];
+                        $('input[name="First"]').val(obj.name.first)
+                        $('input[name="Last"]').val(obj.name.last)
+                         $('input[name="Company"]').val(obj.location.city)
+                        $('input[name="Group"]').val(obj.nat)
+                        $('input[name="Email"]').val(obj.email)
+                        
+                    }
+                });
+            })
+            $('#myForm').submit(function (e) {
+                e.preventDefault();
+                var myData = $('form#myForm :input').serialize();
+                var url = 'https://script.google.com/macros/s/AKfycbz3XKJ4o7B6SADFyiKA0peYuVBtgkV73l9XVPzryea7ib_uYQvB/exec'
+                console.log(myData)
+                $.ajax({
+                    url: url
+                    , method: 'POST'
+                    , data: myData
+                    , success: function (data) {
+                        console.log(data)
+                    }
+                })
+            })
+            $('#loadData').click(function () {
+                var url = 'https://script.google.com/macros/s/AKfycbz3XKJ4o7B6SADFyiKA0peYuVBtgkV73l9XVPzryea7ib_uYQvB/exec'
+                $.getJSON(url, function (data) {
+                    var html = '<h3>Google Sheet Data</h3><ul>';
+                    $.each(data, function (key, val) {
+                        html += '<li> '
+                        for (var x = 0; x < val.length; x++) {
+                            html += val[x] + ' '
+                        }
+                        html += '</li> '
+                    })
+                    html += '</ul> '
+                    $('#output').html(html);
+                })
+            })
+        });
+    </script>
+</body>
+</html>

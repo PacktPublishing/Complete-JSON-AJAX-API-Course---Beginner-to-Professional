@@ -1,0 +1,10 @@
+<script>
+//https://www.google.com/script/start/
+//https://developers.google.com/apps-script/reference/content/content-service
+//https://developers.google.com/speed/libraries/
+    //https://www.getpostman.com/
+function doGet() {
+   return ContentService.createTextOutput("Hello World");
+ }
+ 
+ </script>
