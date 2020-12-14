@@ -1,3 +1,8 @@
+## $5 Tech Unlocked 2021!
+[Buy and download this Video for only $5 on PacktPub.com](https://www.packtpub.com/product/a-complete-json-ajax-api-course-beginner-to-professional-video/9781789616873)
+-----
+*The $5 campaign         runs from __December 15th 2020__ to __January 13th 2021.__*
+
 # A Complete JSON AJAX API Course - Beginner to Professional [Video]
 This is the code repository for [A Complete JSON AJAX API Course - Beginner to Professional [Video]](https://www.packtpub.com/virtualization-and-cloud/hands-developers-guide-mongodb-40-video?utm_source=github&utm_medium=repository&utm_campaign=9781789957822), published by [Packt](https://www.packtpub.com/?utm_source=github). It contains all the supporting project files necessary to work through the video course from start to finish.
 ## About the Video Course
